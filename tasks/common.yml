@@ -1,2 +1,2 @@
 ---
-- debug: msg="Install Mode is {{mesos_install_mode}}"
+- debug: msg="Mesos Install Mode is {{mesos_install_mode}}"

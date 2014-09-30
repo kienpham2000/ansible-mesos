@@ -8,18 +8,6 @@
 - name: Install Debian OS packages
   apt: pkg={{item}} state=present update_cache=yes
   with_items:
-    - wget
-    - curl
-    - g++
-    - gcc
-    - zookeeper-bin
-    - zookeeperd
-    - python-setuptools
-    - python-dev
-    - libcurl4-openssl-dev
-    - libsasl2-2
-    - libsasl2-dev
-    - libcurl3
     - mesos={{mesos_version}}-1.0.{{ansible_distribution|lower}}{{ansible_distribution_version.split('.')|join('')}}
 
 - name: Install Docker

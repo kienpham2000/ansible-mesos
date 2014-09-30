@@ -21,10 +21,20 @@ Vagrant.configure("2") do |config|
     c.vm.network "private_network", ip: "192.168.100.3"
     c.vm.box = "trusty-server-cloudimg-amd64-vagrant-disk1"
   	c.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-  	c.vm.provision "shell" do |s|
-		  s.inline = "apt-get update -y; apt-get install python-software-properties; add-apt-repository ppa:voronov84/andreyv; apt-get update -y; apt-get install ansible -y"
+
+    c.vm.provision "shell" do |s|
+		  s.inline = "
+        apt-get update -y;
+        apt-get install python-software-properties;
+        add-apt-repository ppa:voronov84/andreyv;
+        apt-get update -y; apt-get install ansible -y"
 		  s.privileged = true
     end
+
+    c.vm.provision "ansible" do |ansible|
+      ansible.playbook = "tests/playbook.yml"
+    end
+
   end
 
   # centos 6:
