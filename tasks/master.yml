@@ -2,6 +2,10 @@
 - name: Disable mesos-slave auto init for master only install
   template: src=mesos-slave.override.j2 dest=/etc/init/mesos-slave.override
 
+- name: Set master --quorum
+  template: src=quorum.j2 dest=/etc/mesos-master/quorum
+  when: quorum != ""
+
 - name: Set master --cluster name
   template: src=cluster.j2 dest=/etc/mesos-master/cluster
   when: cluster != ""
@@ -9,6 +13,14 @@
 - name: Set master --quorum
   template: src=quorum.j2 dest=/etc/mesos-master/quorum
   when: quorum != ""
+
+- name: Remove master --log_dir
+  file: path=/etc/mesos-master/log_dir state=absent
+  when: log_dir == ""
+
+- name: Set master --log_dir
+  template: src=log_dir.j2 dest=/etc/mesos-master/log_dir
+  when: log_dir != ""
 
 - name: Remove master --ip
   file: path=/etc/mesos-master/ip state=absent

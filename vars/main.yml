@@ -16,7 +16,7 @@ opts: "--log_dir=$LOGS"
 # http://mesos.apache.org/documentation/latest/configuration/
 ip: "{{ansible_default_ipv4.address}}"
 quorum: "1"
-log_dir: ""
+log_dir: "/var/log/mesos"
 logbufsecs: ""
 logging_level: ""
 port: ""
