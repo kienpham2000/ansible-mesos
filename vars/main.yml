@@ -1,7 +1,7 @@
 ---
-mesos_playbook_version: "0.3.1"
+mesos_playbook_version: "0.3.2"
 mesos_install_mode: "master" # {master|slave|master-slave}
-mesos_version: "0.20.0"
+mesos_version: "0.20.1"
 
 # exec info
 mesos_bin_name: mesos
@@ -24,3 +24,69 @@ mesos_slave_checkpoint: "no"
 
 # enable Docker support
 docker_support: "no"
+
+# Mesos Configuration flags:
+# http://mesos.apache.org/documentation/latest/configuration/
+ip: "{{ansible_default_ipv4.address}}"
+quorum: "1"
+log_dir: ""
+logbufsecs: ""
+logging_level: ""
+port: ""
+quiet: ""
+work_dir: ""
+zk: "zk://{{ip}}:{{mesos_local_port}}/mesos"
+
+# optional
+allocation_interval: ""
+authenticate: ""
+authenticate_slaves: ""
+cluster: "Mesos Cluster {{ip}}"
+credentials: ""
+hostname: ""
+log_auto_initialize: ""
+recovery_slave_removal_limit: ""
+registry: ""
+registry_fetch_timeout: ""
+registry_store_timeout: ""
+registry_strict: ""
+roles: ""
+root_submissions: ""
+slave_reregister_timeout: ""
+user_sorter: ""
+webui_dir: ""
+weights: ""
+whitelist: ""
+zk_session_timeout: ""
+
+# slave
+master: ""
+
+containerizers: ""
+attributes: ""
+cgroups_enable_cfs: ""
+cgroups_hierarchy: ""
+cgroups_root: ""
+cgroups_subsystems: ""
+checkpoint: ""
+recover: ""
+containerizer_path: ""
+isolation: ""
+credential: ""
+default_container_image: ""
+default_role: ""
+disk_watch_interval: ""
+executor_registration_timeout: ""
+executor_shutdown_grace_period: ""
+frameworks_home: ""
+gc_delay: ""
+hadoop_home: ""
+hostname: ""
+launcher_dir: ""
+recovery_timeout: ""
+registration_backoff_factor: ""
+resource_monitoring_interval: ""
+resources: ""
+slave_subsystems: ""
+strict: ""
+switch_user: ""

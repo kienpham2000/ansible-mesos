@@ -8,7 +8,13 @@
 - include: RedHat.yml
   when: ansible_os_family == "RedHat"
 
+- include: master.yml
+  when: mesos_install_mode == "master"
+
 - include: slave.yml
-  when: mesos_install_mode == "slave" or mesos_install_mode == "master-slave"
+  when: mesos_install_mode == "slave"
+
+- include: master-slave.yml
+  when: mesos_install_mode == "master-slave"
 
 - include: deploy.yml

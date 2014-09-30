@@ -1,11 +1,38 @@
 ---
-- name: Overwrite hostname config
+- name: Disable mesos-master auto init for slave only install
+  template: src=mesos-master.override.j2 dest=/etc/init/mesos-master.override
+
+- name: Remove slave --ip
+  file: path=/etc/mesos-slave/ip
+  when: ip == ""
+
+- name: Set slave --ip
+  template: src=ip.j2 dest=/etc/mesos-slave/ip
+  when: ip != ""
+
+- name: Remove slave --hostname
+  file: path=/etc/mesos-slave/hostname
+  when: hostname == ""
+
+- name: Set slave --hostname
   template: src=hostname.j2 dest=/etc/mesos-slave/hostname
+  when: hostname != ""
 
-- name: Turn on slave checkpoint
-  shell: touch /etc/mesos-slave/checkpoint
-  when: mesos_slave_checkpoint == "yes"
+- name: Remove slave --checkpoint
+  file: path=/etc/mesos-slave/?checkpoint state=absent
+  when: checkpoint == ""
 
-- name: Support Docker containerizers
-  shell: echo 'docker,mesos' > /etc/mesos-slave/containerizers
-  when: docker_support == "yes"
+- name: Set slave --checkpoint
+  file: path=/etc/mesos-slave/?checkpoint state=touch
+  when: checkpoint != ""
+
+- name: Remove slave --containerizers
+  file: path=/etc/mesos-slave/containerizers state=absent
+  when: containerizers == ""
+
+- name: Set slave --containerizers
+  template: src=containerizers dest=/etc/mesos-slave/containerizers
+  when: containerizers != ""
+
+- name: Stop mesos-master for slave install
+  service: name=mesos-master state=stopped enabled=no
