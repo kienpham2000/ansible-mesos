@@ -31,7 +31,7 @@
   when: containerizers == ""
 
 - name: Set slave --containerizers
-  template: src=containerizers dest=/etc/mesos-slave/containerizers
+  template: src=containerizers.j2 dest=/etc/mesos-slave/containerizers
   when: containerizers != ""
 
 - name: Stop mesos-master for slave install
