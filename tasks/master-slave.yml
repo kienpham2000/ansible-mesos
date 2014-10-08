@@ -2,11 +2,11 @@
 - include: slave.yml
 - include: master.yml
 
-- name: Remove slave init script override
-  file: path=/etc/init/mesos-slave.override state=absent
-
-- name: Remove master init script override
-  file: path=/etc/init/mesos-master.override state=absent
+- name: Remove master and slave init script override
+  file: path={{item}} state=absent
+  with_items:
+    - /etc/init/mesos-slave.override
+    - /etc/init/mesos-master.override
 
 - name: Enable mesos-master service on boot
   service: name=mesos-master enabled=yes
