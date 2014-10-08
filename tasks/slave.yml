@@ -2,6 +2,10 @@
 - name: Disable mesos-master auto init for slave only install
   template: src=mesos-master.override.j2 dest=/etc/init/mesos-master.override
 
+- name: Set required --master
+  template: src=master.j2 dest=/etc/mesos-slave/master
+  when: master != ""
+
 - name: Remove slave --ip
   file: path=/etc/mesos-slave/ip state=absent
   when: ip == ""

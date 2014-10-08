@@ -47,7 +47,7 @@ whitelist: ""
 zk_session_timeout: ""
 
 # slave
-master: ""
+master: "{{zk}}"
 
 containerizers: ""
 attributes: ""
