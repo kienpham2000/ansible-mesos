@@ -3,7 +3,7 @@
   template: src=mesos-master.override.j2 dest=/etc/init/mesos-master.override
 
 - name: Remove slave --ip
-  file: path=/etc/mesos-slave/ip
+  file: path=/etc/mesos-slave/ip state=absent
   when: ip == ""
 
 - name: Set slave --ip
@@ -11,7 +11,7 @@
   when: ip != ""
 
 - name: Remove slave --hostname
-  file: path=/etc/mesos-slave/hostname
+  file: path=/etc/mesos-slave/hostname state=absent
   when: hostname == ""
 
 - name: Set slave --hostname
