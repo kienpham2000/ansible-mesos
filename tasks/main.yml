@@ -9,10 +9,10 @@
   when: ansible_os_family == "RedHat"
 
 - include: master.yml
-  when: mesos_install_mode == "master"
+  when: mesos_install_mode in ["master", "master-slave"]
 
 - include: slave.yml
-  when: mesos_install_mode == "slave"
+  when: mesos_install_mode in ["slave", "master-slave"]
 
 - include: master-slave.yml
   when: mesos_install_mode == "master-slave"

@@ -6,7 +6,6 @@
 - hosts: all
   sudo: yes
   roles:
-    - {role: ../../}
-    #- {role: ../../, mesos_install_mode: "master-slave"}
+    - {role: ../../, mesos_install_mode: "master-slave"}
 
 - include: main.yml

@@ -4,7 +4,6 @@
 
 - name: Set required --master
   template: src=master.j2 dest=/etc/mesos-slave/master
-  when: master != ""
 
 - name: Remove slave --ip
   file: path=/etc/mesos-slave/ip state=absent

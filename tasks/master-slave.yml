@@ -1,7 +1,4 @@
 ---
-- include: slave.yml
-- include: master.yml
-
 - name: Remove master and slave init script override
   file: path={{item}} state=absent
   with_items:
