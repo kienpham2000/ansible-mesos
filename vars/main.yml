@@ -8,7 +8,6 @@ docker_support: "no"
 
 # conf for /etc/default/mesos
 mesos_ulimit: "-n 8192"
-port: 5050
 logs: "/var/log/mesos"
 opts: "--log_dir=$LOGS"
 
@@ -19,10 +18,10 @@ quorum: "1"
 log_dir: "/var/log/mesos"
 logbufsecs: ""
 logging_level: ""
-port: ""
+port: 5050
 quiet: ""
-work_dir: ""
-zk: "zk://{{ip}}:{{mesos_local_port}}/mesos"
+work_dir: "/var/lib/mesos"
+zk: "zk://{{ip}}:{{port}}/mesos"
 
 # optional
 allocation_interval: ""

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ansible-playbook -i tests/inventory tests/playbook.yml --connection=local
