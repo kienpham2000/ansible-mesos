@@ -5,9 +5,6 @@
 - name: Set slave required --master
   template: src=master.j2 dest=/etc/mesos-slave/master
 
-- name: Set slave requried --zk
-  template: src=zk.j2 dest=/etc/mesos-slave/zk
-
 - name: Remove slave --ip
   file: path=/etc/mesos-slave/ip state=absent
   when: ip == ""
