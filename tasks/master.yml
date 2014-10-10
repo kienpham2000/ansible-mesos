@@ -2,6 +2,9 @@
 - name: Disable mesos-slave auto init for master only install
   template: src=mesos-slave.override.j2 dest=/etc/init/mesos-slave.override
 
+- name: Set master requried --zk
+  template: src=zk.j2 dest=/etc/mesos-master/zk
+
 - name: Set master --quorum
   template: src=quorum.j2 dest=/etc/mesos-master/quorum
   when: quorum != ""
