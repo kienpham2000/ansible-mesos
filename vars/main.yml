@@ -1,77 +1,23 @@
 ---
 mesos_playbook_version: "0.3.2"
+
 mesos_install_mode: "master" # {master|slave|master-slave}
 mesos_version: "0.20.1"
 
-# enable Docker support
-docker_support: "no"
-
-# conf for /etc/default/mesos
+# conf file settings
+mesos_cluster_name: "mesos_cluster"
+mesos_ip: "{{ansible_default_ipv4.address}}"
+mesos_hostname: "{{ inventory_hostname }}"
+mesos_port: "5050"
+mesos_log_location: "/var/log/mesos"
 mesos_ulimit: "-n 8192"
-logs: "/var/log/mesos"
-opts: "--log_dir=$LOGS"
+mesos_options: "--log_dir=$LOGS"
+mesos_work_dir: "/var/mesos"
+mesos_quorum: "1"
+zookeeper_client_port: "2181"
+zookeeper_hostnames: "{{ mesos_hostname }}:{{ zookeeper_client_port }}"
+mesos_zookeeper_masters: "zk://{{ zookeeper_hostnames }}/mesos"
 
-# Mesos Configuration flags:
-# http://mesos.apache.org/documentation/latest/configuration/
-ip: "{{ansible_default_ipv4.address}}"
-quorum: "1"
-log_dir: "/var/log/mesos"
-logbufsecs: ""
-logging_level: ""
-port: 5050
-quiet: ""
-work_dir: "/var/lib/mesos"
-zk: "zk://{{ip}}:{{port}}/mesos"
-
-# optional
-allocation_interval: ""
-authenticate: ""
-authenticate_slaves: ""
-cluster: "Mesos Cluster {{ip}}"
-credentials: ""
-hostname: ""
-log_auto_initialize: ""
-recovery_slave_removal_limit: ""
-registry: ""
-registry_fetch_timeout: ""
-registry_store_timeout: ""
-registry_strict: ""
-roles: ""
-root_submissions: ""
-slave_reregister_timeout: ""
-user_sorter: ""
-webui_dir: ""
-weights: ""
-whitelist: ""
-zk_session_timeout: ""
-
-# slave
-master: "{{zk}}"
-
-containerizers: ""
-attributes: ""
-cgroups_enable_cfs: ""
-cgroups_hierarchy: ""
-cgroups_root: ""
-cgroups_subsystems: ""
-checkpoint: ""
-recover: ""
-containerizer_path: ""
-isolation: ""
-credential: ""
-default_container_image: ""
-default_role: ""
-disk_watch_interval: ""
-executor_registration_timeout: ""
-executor_shutdown_grace_period: ""
-frameworks_home: ""
-gc_delay: ""
-hadoop_home: ""
-launcher_dir: ""
-recovery_timeout: ""
-registration_backoff_factor: ""
-resource_monitoring_interval: ""
-resources: ""
-slave_subsystems: ""
-strict: ""
-switch_user: ""
+# Containerizer
+mesos_containerizers: "mesos"
+mesos_executor_timeout: "5mins"
